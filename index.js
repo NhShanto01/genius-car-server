@@ -21,14 +21,14 @@ function verifyJWT(req, res, next) {
         if (err) {
             return res.status(403).send({ message: 'Forbidden access' });
         }
-        console.log('decoded', decoded);
+        console.log('heroku hoise naki', decoded);
         req.decoded = decoded;
 
         // console.log('inside verifyJWT', authHeader);
         next();
     })
 }
-        
+
 // user:geniususer
 // pass:Rw5eszh7soxOYMXG
 
@@ -46,7 +46,7 @@ async function run() {
         await client.connect();
         const serviceCollection = client.db('geniusCar').collection('service');
         const orderCollection = client.db('geniusCar').collection('order');
-        
+
 
         app.post('/login', async (req, res) => {
             const user = req.body;
@@ -93,14 +93,14 @@ async function run() {
                 const orders = await cursor.toArray();
                 res.send(orders);
             }
-            else{
-                res.status(403).send({message: 'forbidden access'})
+            else {
+                res.status(403).send({ message: 'forbidden access' })
             }
         })
 
-        app.post('/order',async(req,res)=>{
-            const order =req.body;
-            const result=await orderCollection.insertOne(order);
+        app.post('/order', async (req, res) => {
+            const order = req.body;
+            const result = await orderCollection.insertOne(order);
             res.send(result);
         })
     }
